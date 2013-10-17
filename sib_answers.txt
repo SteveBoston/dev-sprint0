@@ -1,0 +1,81 @@
+Dev Lab #00
+
+Steve Gallagher
+
+Oct. 9, 2013
+
+
+
+
+
+1. Why would refactoring be useful?
+
+	Refactoring is a way to make code simpler and more straightforward. Removing redundant elements and putting every piece of code in the 
+	
+	most logical place makes the program easier to edit later, either by the original programmer or by others. Code that's difficult to read
+
+	can waste a lot of time down the road.
+
+
+2. What would the code change be to make the house appear twice as high given the latest version of the refactor_example script?
+
+
+	New script:
+
+
+
+	from TurtleWorld import *
+world = TurtleWorld()
+bob = Turtle()
+
+world.clear()
+
+def fdlt(turtle, length=0, angle=90):
+  turtle.fd(length)
+  turtle.lt(angle)
+
+def fdrt(turtle, length=0, angle=90):
+  turtle.fd(length)
+  turtle.rt(angle)
+
+def shift(turtle, distance=10):
+  turtle.pu()
+  turtle.fd(distance)
+  turtle.pd()
+
+def draw_house(turtle, size=10):
+  fdlt(turtle, 3*size)
+  fdrt(turtle, 2*size)
+  fdrt(turtle, 1*size)
+  fdlt(turtle, 2*size)
+  turtle.bk(1*size)
+  fdlt(turtle, 4*size)
+  fdlt(turtle, 8*size, 45)
+  fdlt(turtle, 5*size)
+  fdlt(turtle, 5*size, 45)
+  fdlt(turtle, 8*size)
+  turtle.lt()
+  fdrt(turtle, 8*size)
+  fdrt(turtle, 7*size)
+  fdlt(turtle, 8*size)
+
+draw_house(bob)
+shift(bob)
+draw_house(bob)
+
+wait_for_user()
+
+	
+
+
+3. What would the code change look like if we had never made a draw_house method that took size as a parameter (no need to actually write it,
+
+   just explain what it would entail)?
+
+	
+
+	Removing the size parameter and adding zeros to the lengths in each step of draw_house would produce the same result as the current code.
+
+	
+
+	
