@@ -1,6 +1,179 @@
 # Text answers from Week 0
 
-# Name:
+# Name: Steve GAllagher
+
+
+
+
+1. Why would refactoring be useful?
+
+	Refactoring is a way to make code simpler and more straightforward. Removing redundant elements and putting every piece of code in the 
+	
+	most logical place makes the program easier to edit later, either by the original programmer or by others. Code that's difficult to read
+
+	can waste a lot of time down the road.
+
+
+2. What would the code change be to make the house appear twice as high given the latest version of the refactor_example script?
+
+
+	New script:
+
+
+
+	from TurtleWorld import *
+world = TurtleWorld()
+bob = Turtle()
+
+world.clear()
+
+def fdlt(turtle, length=0, angle=90):
+  turtle.fd(length)
+  turtle.lt(angle)
+
+def fdrt(turtle, length=0, angle=90):
+  turtle.fd(length)
+  turtle.rt(angle)
+
+def shift(turtle, distance=10):
+  turtle.pu()
+  turtle.fd(distance)
+  turtle.pd()
+
+def draw_house(turtle, size=10):
+  fdlt(turtle, 3*size)
+  fdrt(turtle, 2*size)
+  fdrt(turtle, 1*size)
+  fdlt(turtle, 2*size)
+  turtle.bk(1*size)
+  fdlt(turtle, 4*size)
+  fdlt(turtle, 8*size, 45)
+  fdlt(turtle, 5*size)
+  fdlt(turtle, 5*size, 45)
+  fdlt(turtle, 8*size)
+  turtle.lt()
+  fdrt(turtle, 8*size)
+  fdrt(turtle, 7*size)
+  fdlt(turtle, 8*size)
+
+draw_house(bob)
+shift(bob)
+draw_house(bob)
+
+wait_for_user()
+
+	
+
+
+3. What would the code change look like if we had never made a draw_house method that took size as a parameter (no need to actually write it,
+
+   just explain what it would entail)?
+
+	
+
+	Removing the size parameter and adding zeros to the lengths in each step of draw_house would produce the same result as the current code.
+
+
+
+
+4. Note that to call fdlt() the way it is implemented, we need to write `fdlt(bob, 20)`, for example. What would the function look
+    
+   like if we wanted to also pass in a parameter for the angle?
+
+
+	def fdlt(turtle, n, ang):
+           fd(turtle, n)
+           lt(turtle, ang)
+
+	
+
+	To call the function, write (for example): 'fdlt(bob, 50, 45)'
+
+
+
+
+
+5.  What would we have to do to be able to write `bob.fdlt(length, angle)`? 
+
+
+
+	Was not able to get it to do this....
+
+
+
+	
+
+
+6.  Why does theta need to be in units of degrees?
+
+
+	In the original script, dividing theta by the arc length in degrees per side gave the number of times that the for loop had to run to make the whole arc.
+    
+        That number needs to be an integer. But pi isn't an integer, so when theta is in radians the division yields a float, which causes an error.
+
+
+
+
+
+
+7. What would you have to do in order to make arc(turtle=bob, r=10, theta=6.3) draw a complete circle (i.e. to make arc accept radians, 
+
+   instead of degrees)?
+
+
+	Convert theta in radians to theta in degrees, and then round the result to the nearest integer:
+
+
+from TurtleWorld import * 		
+world = TurtleWorld()			
+bob = Turtle()				
+
+
+import math
+
+
+
+def arc(turtle, rad, theta):
+
+
+	circumfer = rad * 2 * math.pi
+	segmentlength = circumfer/120
+
+	thetaconversion = 360/(2 * math.pi)
+
+	thetadegrees = int(round(thetaconversion * theta))
+
+
+	for i in range(thetadegrees/3):
+		fd(turtle, segmentlength)
+		lt(turtle, 3)
+
+
+
+
+
+pu(bob)
+fd(bob, 700)
+rt(bob)
+fd(bob, 300)
+pd(bob)
+
+
+arc(bob, 100, 6.3)
+
+
+
+
+wait_for_user()					
+
+
+
+
+
+
+
+
+
 
 
 
@@ -13,7 +186,10 @@ Explain what each of the following lines does. Use the terminology you learned f
 
 Answer:
 
-
+	from TurtleWorld import *------------------------------>imports Turtleworld module from Swampy package
+	world = TurtleWorld()---------------------------------->creates a Turtleworld assigned to world
+	bob = Turtle()----------------------------------------->creates a Turtle assigned to bob
+	wait_for_user()---------------------------------------->tells Turtleworld to wait for user input
 
 
 
@@ -21,13 +197,18 @@ Answer:
 These questions pertain to the program you wrote in Week0.
 
 -- What are the arguments of polygon()?  What type is each argument?
-Answer:
+Answer: t (assigns a specific turtle)
+	n (number of sides)
+	length (length of each side)
 
 -- What two turtle functions did you use to draw the sides of the polygon?
-Answer:
+Answer: fd and lt
 
 -- What are the arguments for polyline?  What type is each argument?
-Answer:
+Answer: t (assigns a specific turtle)
+	n (number of sides)
+	length (length of each side)
+	angle (angle between sides)
 
 
 
@@ -36,10 +217,10 @@ Answer:
 Suppose you wrote a function, center_circle(), that draws a circle of a given radius around the current location of the turtle and restores the turtle to its starting point.
 
 -- What turtle functions would you use to move the turtle from the center to the edge of the circle and get ready to call the original circle() function?
-Answer:
+Answer: pu, pd, fd, lt and/or rt
 
 -- Suppose the interface of this function requires the turtle to end up in the same place it started, facing in the same direction it started.
-Answer:
+Answer: same functions as above
 
 -- What is this type of requirement called?
-Answer:
+Answer: A return statement

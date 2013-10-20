@@ -1,6 +1,6 @@
 # Polygon excercise from Week 0
 
-# Name:
+# Name: Steve Gallagher
 
 
 from TurtleWorld import * 		
@@ -9,7 +9,22 @@ bob = Turtle()
 
 
 
-# This is where you put code to move bob
+def polygon(turtle, sidelength, sidenumber):
+
+	ang = 360/sidenumber
+
+	for i in range(sidenumber):
+		fd(turtle, sidelength)
+		lt(turtle, ang)
+
+
+polygon(bob, 4, 30)
+
+
+
+
+
+
 
 
 
